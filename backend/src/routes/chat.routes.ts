@@ -14,7 +14,8 @@ router.post('/', requireAuth, async (req, res) => {
     }
 
     // Call the Python AI service
-    const aiResponse = await axios.post('http://127.0.0.1:8000/analyze', {
+    const aiServiceUrl = process.env.AI_SERVICE_URL || 'http://127.0.0.1:8000';
+    const aiResponse = await axios.post(`${aiServiceUrl}/analyze`, {
       user_id: userId,
       message: message,
       language: language
