@@ -67,7 +67,7 @@ export const updateTransaction = async (req: AuthRequest, res: Response): Promis
     const validatedData = transactionSchema.partial().parse(req.body);
 
     const existingTransaction = await prisma.transaction.findUnique({
-      where: { id },
+      where: { id: id as string },
     });
 
     if (!existingTransaction || existingTransaction.user_id !== userId) {
@@ -76,7 +76,7 @@ export const updateTransaction = async (req: AuthRequest, res: Response): Promis
     }
 
     const transaction = await prisma.transaction.update({
-      where: { id },
+      where: { id: id as string },
       data: {
         ...validatedData,
         date: validatedData.date ? new Date(validatedData.date) : undefined,
@@ -100,7 +100,7 @@ export const deleteTransaction = async (req: AuthRequest, res: Response): Promis
     const userId = req.user!.id;
 
     const existingTransaction = await prisma.transaction.findUnique({
-      where: { id },
+      where: { id: id as string },
     });
 
     if (!existingTransaction || existingTransaction.user_id !== userId) {
@@ -109,7 +109,7 @@ export const deleteTransaction = async (req: AuthRequest, res: Response): Promis
     }
 
     await prisma.transaction.delete({
-      where: { id },
+      where: { id: id as string },
     });
 
     res.json({ success: true, data: { message: 'Transaction deleted successfully' } });
