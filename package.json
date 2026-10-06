@@ -1,0 +1,23 @@
+{
+  "name": "fin-saathi",
+  "version": "1.0.0",
+  "description": "**\"Ask your money anything.\"**",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:ai": "cd ai-service && .\\venv\\Scripts\\activate && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload",
+    "dev": "concurrently -c \"cyan,magenta,yellow\" -n \"FRONTEND,BACKEND,AI-SERVICE\" \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:ai\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
