@@ -106,7 +106,7 @@ export default function Login() {
         </div>
 
         <div className="relative z-10 text-sm text-primary-foreground/60">
-          © {new Date().getFullYear()} FinSaathi Inc. All rights reserved.
+          {t('auth.copyright', '© {{year}} FinSaathi Inc. All rights reserved.', { year: new Date().getFullYear() })}
         </div>
       </div>
 
