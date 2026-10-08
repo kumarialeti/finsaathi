@@ -46,9 +46,9 @@ export default function ProfileSettings() {
       if (formData.language !== i18n.language) {
         i18n.changeLanguage(formData.language);
       }
-      setStatus({ type: 'success', message: 'Your changes have been saved.' });
+      setStatus({ type: 'success', message: t('settings.profile_info.save_success', 'Your changes have been saved.') });
     } catch (err: any) {
-      setStatus({ type: 'error', message: err.response?.data?.error || 'Failed to update profile.' });
+      setStatus({ type: 'error', message: err.response?.data?.error || t('settings.profile_info.save_error', 'Failed to update profile.') });
     } finally {
       setLoading(false);
     }

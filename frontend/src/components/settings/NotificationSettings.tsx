@@ -49,9 +49,9 @@ export default function NotificationSettings() {
     setStatus(null);
     try {
       await api.put('/settings/notifications', prefs);
-      setStatus({ type: 'success', message: 'Preferences updated successfully.' });
+      setStatus({ type: 'success', message: t('settings.notifications.save_success', 'Preferences updated successfully.') });
     } catch (err) {
-      setStatus({ type: 'error', message: 'Failed to update preferences.' });
+      setStatus({ type: 'error', message: t('settings.notifications.save_error', 'Failed to update preferences.') });
     } finally {
       setSaving(false);
     }
@@ -147,3 +147,4 @@ export default function NotificationSettings() {
     </div>
   );
 }
+

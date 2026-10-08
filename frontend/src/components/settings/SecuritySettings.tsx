@@ -35,7 +35,7 @@ export default function SecuritySettings() {
   const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setStatus({ type: 'error', message: 'New passwords do not match' });
+      setStatus({ type: 'error', message: t('settings.security.password_mismatch', 'New passwords do not match') });
       return;
     }
     
@@ -46,10 +46,10 @@ export default function SecuritySettings() {
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword
       });
-      setStatus({ type: 'success', message: 'Password updated successfully' });
+      setStatus({ type: 'success', message: t('settings.security.password_success', 'Password updated successfully') });
       setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
     } catch (err: any) {
-      setStatus({ type: 'error', message: err.response?.data?.error || 'Failed to update password' });
+      setStatus({ type: 'error', message: err.response?.data?.error || t('settings.security.password_error', 'Failed to update password') });
     } finally {
       setLoading(false);
     }
@@ -165,3 +165,4 @@ export default function SecuritySettings() {
     </div>
   );
 }
+

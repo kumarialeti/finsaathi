@@ -26,7 +26,7 @@ export default function Login() {
         navigate('/dashboard');
       }
     } catch (err: any) {
-      setError(err.response?.data?.error?.message || 'Invalid email or password. Please try again.');
+      setError(err.response?.data?.error?.message || t('auth.login_error', 'Invalid email or password. Please try again.'));
     } finally {
       setLoading(false);
     }

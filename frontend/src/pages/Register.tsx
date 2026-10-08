@@ -27,7 +27,7 @@ export default function Register() {
         navigate('/dashboard');
       }
     } catch (err: any) {
-      setError(err.response?.data?.error?.message || 'Failed to create account. Please try again.');
+      setError(err.response?.data?.error?.message || t('auth.register_error', 'Failed to create account. Please try again.'));
     } finally {
       setLoading(false);
     }
