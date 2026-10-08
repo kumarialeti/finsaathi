@@ -18,6 +18,7 @@ import chatRoutes from './routes/chat.routes';
 import analyticsRoutes from './routes/analytics.routes';
 import budgetRoutes from './routes/budget.routes';
 import documentRoutes from './routes/document.routes';
+import settingsRoutes from './routes/settings.routes';
 
 app.use('/api/auth', authRoutes);
 app.use('/api/transactions', transactionRoutes);
@@ -27,6 +28,7 @@ app.use('/api/chat', chatRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/budgets', budgetRoutes);
 app.use('/api/documents', documentRoutes);
+app.use('/api/settings', settingsRoutes);
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'fin-saathi-backend' });

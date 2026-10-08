@@ -8,21 +8,24 @@ datasource db {
 }
 
 model User {
-  id                String            @id @default(uuid())
-  name              String
-  email             String            @unique
-  password_hash     String
-  created_at        DateTime          @default(now())
-  updated_at        DateTime          @updatedAt
-  budgets           Budget[]
-  categories        Category[]
-  chat_sessions     ChatSession[]
-  financial_profile FinancialProfile?
-  receipts          Receipt[]
-  savings_goals     SavingsGoal[]
-  subscriptions     Subscription[]
-  transactions      Transaction[]
-  documents         FinancialDocument[]
+  id                      String                  @id @default(uuid())
+  name                    String
+  email                   String                  @unique
+  phone                   String?
+  language                String                  @default("en")
+  password_hash           String
+  created_at              DateTime                @default(now())
+  updated_at              DateTime                @updatedAt
+  budgets                 Budget[]
+  categories              Category[]
+  chat_sessions           ChatSession[]
+  financial_profile       FinancialProfile?
+  notification_preference NotificationPreference?
+  receipts                Receipt[]
+  savings_goals           SavingsGoal[]
+  subscriptions           Subscription[]
+  transactions            Transaction[]
+  documents               FinancialDocument[]
 }
 
 model FinancialProfile {
@@ -149,4 +152,18 @@ model FinancialKnowledge {
   id      String @id @default(uuid())
   title   String
   content String
+}
+
+model NotificationPreference {
+  id                    String   @id @default(uuid())
+  user_id               String   @unique
+  transaction_alerts    Boolean  @default(true)
+  budget_alerts         Boolean  @default(true)
+  goal_reminders        Boolean  @default(true)
+  subscription_reminders Boolean @default(true)
+  ai_insights           Boolean  @default(true)
+  security_alerts       Boolean  @default(true)
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+  user                  User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
