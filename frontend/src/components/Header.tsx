@@ -13,6 +13,7 @@ export default function Header() {
     const path = location.pathname;
     if (path.includes('dashboard')) return { title: t('sidebar.dashboard'), desc: t('dashboard.overview') };
     if (path.includes('transactions')) return { title: t('transactions.title'), desc: t('transactions.subtitle') };
+    if (path.includes('documents')) return { title: t('documents.title'), desc: t('documents.subtitle') };
     if (path.includes('budgets')) return { title: t('budgets.title'), desc: t('budgets.subtitle') };
     if (path.includes('insights')) return { title: t('insights.title'), desc: t('insights.subtitle') };
     if (path.includes('ask')) return { title: t('chat.title'), desc: t('chat.subtitle') };

@@ -25,7 +25,7 @@ export default function Documents() {
   const [error, setError] = useState('');
   
   const [messages, setMessages] = useState<Message[]>([
-    { id: '0', role: 'assistant', content: 'Upload your bank statements and ask me any questions about your transactions.' }
+    { id: '0', role: 'assistant', content: t('documents.welcome_msg') }
   ]);
   const [input, setInput] = useState('');
   const [asking, setAsking] = useState(false);
@@ -38,7 +38,7 @@ export default function Documents() {
       setDocuments(res.data.data || []);
     } catch (err: any) {
       console.error(err);
-      setError('Failed to fetch documents.');
+      setError(t('documents.fetch_error'));
     } finally {
       setLoading(false);
     }
@@ -70,7 +70,7 @@ export default function Documents() {
       if (fileInputRef.current) fileInputRef.current.value = '';
     } catch (err: any) {
       console.error(err);
-      setError(err.response?.data?.error?.message || 'Failed to upload document.');
+      setError(err.response?.data?.error?.message || t('documents.upload_error'));
     } finally {
       setUploading(false);
     }
@@ -93,7 +93,7 @@ export default function Documents() {
       const assistantMessage: Message = { 
         id: (Date.now() + 1).toString(), 
         role: 'assistant', 
-        content: res.data.reply || res.data.data?.reply || 'Sorry, I could not generate a response.'  
+        content: res.data.reply || res.data.data?.reply || t('documents.fallback_reply')
       };
       setMessages(prev => [...prev, assistantMessage]);
     } catch (err) {
@@ -101,7 +101,7 @@ export default function Documents() {
       setMessages(prev => [...prev, { 
         id: (Date.now() + 1).toString(), 
         role: 'assistant', 
-        content: 'Sorry, I encountered an error answering your question.' 
+        content: t('documents.chat_error')
       }]);
     } finally {
       setAsking(false);
@@ -117,7 +117,7 @@ export default function Documents() {
 
   return (
     <div className="flex flex-col h-full gap-6 p-6">
-      <h1 className="text-2xl font-bold text-foreground">Financial Documents</h1>
+      <h1 className="text-2xl font-bold text-foreground">{t('documents.title')}</h1>
 
       {error && (
         <div className="bg-destructive/10 text-destructive px-4 py-3 rounded-lg text-sm">
@@ -130,7 +130,7 @@ export default function Documents() {
         <div className="bg-card border border-border rounded-xl p-4 flex flex-col">
           <label className="mb-6 cursor-pointer bg-primary text-primary-foreground flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg hover:bg-primary/90 transition-colors font-medium">
             {uploading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Upload className="w-5 h-5" />}
-            {uploading ? 'Uploading...' : 'Upload PDF / Excel'}
+            {uploading ? t('documents.uploading') : t('documents.upload_btn')}
             <input
               type="file"
               className="hidden"
@@ -141,7 +141,7 @@ export default function Documents() {
             />
           </label>
 
-          <h3 className="font-semibold text-sm mb-3">Uploaded files:</h3>
+          <h3 className="font-semibold text-sm mb-3">{t('documents.uploaded_files')}</h3>
           
           <div className="flex-1 overflow-y-auto space-y-2">
             {loading ? (
@@ -149,7 +149,7 @@ export default function Documents() {
                 <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
               </div>
             ) : documents.length === 0 ? (
-              <p className="text-sm text-muted-foreground italic">No documents uploaded yet.</p>
+              <p className="text-sm text-muted-foreground italic">{t('documents.no_documents')}</p>
             ) : (
               documents.map(doc => (
                 <div key={doc.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-secondary/50">
@@ -169,7 +169,7 @@ export default function Documents() {
         {/* Right column: Chat UI */}
         <div className="bg-card border border-border rounded-xl flex flex-col overflow-hidden">
           <div className="p-4 border-b border-border bg-secondary/30">
-            <h2 className="font-semibold">Ask about your financial data</h2>
+            <h2 className="font-semibold">{t('documents.chat_title')}</h2>
           </div>
           
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -198,7 +198,7 @@ export default function Documents() {
                 </div>
                 <div className="px-4 py-3 rounded-2xl bg-secondary rounded-tl-sm flex items-center gap-2">
                   <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
-                  <span className="text-sm text-muted-foreground">Analyzing...</span>
+                  <span className="text-sm text-muted-foreground">{t('documents.analyzing')}</span>
                 </div>
               </div>
             )}
@@ -209,7 +209,7 @@ export default function Documents() {
             <div className="flex items-center gap-2">
               <input
                 type="text"
-                placeholder="How much did I spend last month?"
+                placeholder={t('documents.placeholder')}
                 className="flex-1 bg-secondary border-none rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}

@@ -239,5 +239,21 @@
         }
       ]
     }
+  },
+  "documents": {
+    "title": "Financial Documents",
+    "subtitle": "Upload and query your financial documents.",
+    "welcome_msg": "Upload your bank statements and ask me any questions about your transactions.",
+    "uploading": "Uploading...",
+    "upload_btn": "Upload PDF / Excel",
+    "uploaded_files": "Uploaded files:",
+    "no_documents": "No documents uploaded yet.",
+    "chat_title": "Ask about your financial data",
+    "analyzing": "Analyzing...",
+    "placeholder": "How much did I spend last month?",
+    "fetch_error": "Failed to fetch documents.",
+    "upload_error": "Failed to upload document.",
+    "chat_error": "Sorry, I encountered an error answering your question.",
+    "fallback_reply": "Sorry, I could not generate a response."
   }
 }

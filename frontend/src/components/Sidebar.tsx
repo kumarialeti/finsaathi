@@ -28,7 +28,7 @@ export default function Sidebar() {
   const mainNavItems = [
     { name: t('sidebar.dashboard'), path: '/dashboard', icon: LayoutDashboard },
     { name: t('sidebar.transactions'), path: '/transactions', icon: ListOrdered },
-    { name: 'Documents', path: '/documents', icon: FileText },
+    { name: t('documents.title'), path: '/documents', icon: FileText },
     { name: t('sidebar.budgets'), path: '/budgets', icon: Target },
     { name: t('sidebar.insights'), path: '/insights', icon: LineChart },
   ];
