@@ -152,19 +152,19 @@ export default function Transactions() {
                 <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full p-2.5 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm">
                   {type === 'EXPENSE' ? (
                     <>
-                      <option>Food</option>
-                      <option>Transport</option>
-                      <option>Shopping</option>
-                      <option>Bills</option>
-                      <option>Entertainment</option>
-                      <option>Health</option>
+                      <option value="Food">{t('categories.food', 'Food')}</option>
+                      <option value="Transport">{t('categories.transport', 'Transport')}</option>
+                      <option value="Shopping">{t('categories.shopping', 'Shopping')}</option>
+                      <option value="Bills">{t('categories.bills', 'Bills')}</option>
+                      <option value="Entertainment">{t('categories.entertainment', 'Entertainment')}</option>
+                      <option value="Health">{t('categories.health', 'Health')}</option>
                     </>
                   ) : (
                     <>
-                      <option>Salary</option>
-                      <option>Freelance</option>
-                      <option>Investment</option>
-                      <option>Other</option>
+                      <option value="Salary">{t('categories.salary', 'Salary')}</option>
+                      <option value="Freelance">{t('categories.freelance', 'Freelance')}</option>
+                      <option value="Investment">{t('categories.investment', 'Investment')}</option>
+                      <option value="Other">{t('categories.other', 'Other')}</option>
                     </>
                   )}
                 </select>
@@ -222,7 +222,7 @@ export default function Transactions() {
             >
               <option value="ALL">{t('transactions.all_categories')}</option>
               {uniqueCategories.map((c: any) => (
-                <option key={c} value={c}>{c}</option>
+                <option key={c} value={c}>{t(`categories.${c.toLowerCase()}`, c)}</option>
               ))}
             </select>
           </div>
@@ -272,7 +272,7 @@ export default function Transactions() {
                     </td>
                     <td className="px-6 py-4">
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border">
-                        {tx.category || 'General'}
+                        {t(`categories.${(tx.category || 'General').toLowerCase()}`, tx.category || 'General')}
                       </span>
                     </td>
                     <td className={`px-6 py-4 text-right font-bold ${tx.transaction_type === 'INCOME' ? 'text-primary' : 'text-foreground'}`}>

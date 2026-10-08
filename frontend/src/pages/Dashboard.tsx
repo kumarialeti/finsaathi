@@ -70,7 +70,7 @@ export default function Dashboard() {
 
   const topCategory = summary?.topCategories?.[0];
   const insightText = topCategory 
-    ? t('dashboard.highest_expense', { amount: topCategory.amount.toLocaleString(), category: topCategory.name })
+    ? t('dashboard.highest_expense', { amount: topCategory.amount.toLocaleString(), category: t(`categories.${(topCategory.name || 'general').toLowerCase()}`, topCategory.name) })
     : t('dashboard.add_more_transactions');
 
   return (
@@ -160,7 +160,7 @@ export default function Dashboard() {
                   </ResponsiveContainer>
                 </div>
               ) : (
-                <div className="flex-1 flex items-center justify-center text-sm text-muted-foreground">Not enough data to show trend.</div>
+                <div className="flex-1 flex items-center justify-center text-sm text-muted-foreground">{t('dashboard.not_enough_data', 'Not enough data to show trend.')}</div>
               )}
             </div>
 
@@ -198,7 +198,7 @@ export default function Dashboard() {
                       <div key={cat.name} className="flex items-center justify-between text-sm">
                         <div className="flex items-center gap-2.5">
                           <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }}></div>
-                          <span className="text-muted-foreground">{cat.name}</span>
+                          <span className="text-muted-foreground">{t(`categories.${(cat.name || 'general').toLowerCase()}`, cat.name)}</span>
                         </div>
                         <span className="font-semibold text-foreground">₹{cat.amount.toLocaleString()}</span>
                       </div>
@@ -269,7 +269,7 @@ export default function Dashboard() {
                         </td>
                         <td className="px-6 py-4">
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border">
-                            {tx.category}
+                            {t(`categories.${(tx.category || 'general').toLowerCase()}`, tx.category)}
                           </span>
                         </td>
                         <td className={`px-6 py-4 text-right font-bold ${tx.transaction_type === 'INCOME' ? 'text-primary' : 'text-foreground'}`}>

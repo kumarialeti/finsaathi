@@ -76,13 +76,13 @@ export default function Budgets() {
               <div>
                 <label className="text-sm font-medium text-foreground block mb-1.5">{t('budgets.category_label')}</label>
                 <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full p-2.5 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm">
-                  <option>Food</option>
-                  <option>Transport</option>
-                  <option>Shopping</option>
-                  <option>Bills</option>
-                  <option>Entertainment</option>
-                  <option>General</option>
-                  <option>Health</option>
+                  <option value="Food">{t('categories.food', 'Food')}</option>
+                  <option value="Transport">{t('categories.transport', 'Transport')}</option>
+                  <option value="Shopping">{t('categories.shopping', 'Shopping')}</option>
+                  <option value="Bills">{t('categories.bills', 'Bills')}</option>
+                  <option value="Entertainment">{t('categories.entertainment', 'Entertainment')}</option>
+                  <option value="General">{t('categories.general', 'General')}</option>
+                  <option value="Health">{t('categories.health', 'Health')}</option>
                 </select>
               </div>
               <div>
@@ -122,7 +122,7 @@ export default function Budgets() {
                 <div>
                   <div className="flex justify-between items-start mb-6">
                     <div>
-                      <h3 className="font-bold text-lg text-foreground">{budget.category}</h3>
+                      <h3 className="font-bold text-lg text-foreground">{t(`categories.${budget.category.toLowerCase()}`, budget.category)}</h3>
                       <p className="text-sm font-medium text-muted-foreground mt-1">₹{budget.amount.toLocaleString()} {t('budgets.monthly_limit').toLowerCase()}</p>
                     </div>
                     <div className="w-10 h-10 rounded-full bg-secondary text-primary flex items-center justify-center shrink-0">

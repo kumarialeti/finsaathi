@@ -86,13 +86,13 @@ export default function Sidebar() {
           <span className="w-7 h-7 rounded bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">F</span>
           FinSaathi
         </h1>
-        <p className="text-xs text-muted-foreground mt-1 font-medium">Your money, made clear.</p>
+        <p className="text-xs text-muted-foreground mt-1 font-medium">{t('sidebar.tagline', 'Your money, made clear.')}</p>
       </div>
 
       <nav className="flex-1 overflow-y-auto">
-        {renderNavSection('Main', mainNavItems)}
-        {renderNavSection('Intelligence', intelNavItems)}
-        {renderNavSection('Account', accountNavItems)}
+        {renderNavSection(t('sidebar.main', 'Main'), mainNavItems)}
+        {renderNavSection(t('sidebar.intelligence', 'Intelligence'), intelNavItems)}
+        {renderNavSection(t('sidebar.account', 'Account'), accountNavItems)}
       </nav>
 
       <div className="p-4 border-t border-border mt-auto">

@@ -255,5 +255,18 @@
     "upload_error": "Failed to upload document.",
     "chat_error": "Sorry, I encountered an error answering your question.",
     "fallback_reply": "Sorry, I could not generate a response."
+  },
+  "categories": {
+    "food": "Food",
+    "transport": "Transport",
+    "shopping": "Shopping",
+    "bills": "Bills",
+    "entertainment": "Entertainment",
+    "health": "Health",
+    "salary": "Salary",
+    "freelance": "Freelance",
+    "investment": "Investment",
+    "other": "Other",
+    "general": "General"
   }
 }
