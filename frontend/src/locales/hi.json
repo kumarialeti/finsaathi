@@ -140,6 +140,13 @@
     "language": "भाषा प्राथमिकता",
     "select_language": "भाषा चुनें",
     "save_changes": "परिवर्तन सहेजें",
-    "saving": "सहेजा जा रहा है..."
+    "saving": "सहेजा जा रहा है...",
+    "tabs": {
+      "profile": "प्रोफ़ाइल",
+      "accounts": "खाते",
+      "notifications": "सूचनाएं",
+      "security": "सुरक्षा",
+      "support": "सहायता और समर्थन"
+    }
   }
 }

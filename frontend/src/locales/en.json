@@ -140,6 +140,13 @@
     "language": "Language Preference",
     "select_language": "Select Language",
     "save_changes": "Save Changes",
-    "saving": "Saving..."
+    "saving": "Saving...",
+    "tabs": {
+      "profile": "Profile",
+      "accounts": "Accounts",
+      "notifications": "Notifications",
+      "security": "Security",
+      "support": "Help & Support"
+    }
   }
 }
