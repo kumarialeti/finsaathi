@@ -2,6 +2,7 @@ import { Bell, User, Globe } from 'lucide-react';
 import { useLocation, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 import { useTranslation } from 'react-i18next';
+import api from '../utils/api';
 
 export default function Header() {
   const location = useLocation();
@@ -26,8 +27,16 @@ export default function Header() {
     return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
   };
 
-  const changeLanguage = (lng: string) => {
+  const changeLanguage = async (lng: string) => {
     i18n.changeLanguage(lng);
+    if (user) {
+      try {
+        await api.put('/settings/profile', { language: lng });
+        useAuthStore.getState().setUser({ ...user, language: lng });
+      } catch (e) {
+        console.error('Failed to save language preference', e);
+      }
+    }
   };
 
   return (

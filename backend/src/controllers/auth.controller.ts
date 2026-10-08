@@ -77,7 +77,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.json({
       success: true,
       data: {
-        user: { id: user.id, name: user.name, email: user.email, created_at: user.created_at },
+        user: { id: user.id, name: user.name, email: user.email, language: user.language, created_at: user.created_at },
         token,
       },
     });
@@ -99,6 +99,7 @@ export const getMe = async (req: AuthRequest, res: Response): Promise<void> => {
         id: true,
         name: true,
         email: true,
+        language: true,
         created_at: true,
       },
     });
