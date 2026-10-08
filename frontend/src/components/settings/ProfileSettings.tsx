@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import api from '../../utils/api';
 import { useAuthStore } from '../../store/useAuthStore';
 import { LogOut } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function ProfileSettings() {
+  const { t, i18n } = useTranslation();
   const { user, setUser, logout } = useAuthStore();
   const [formData, setFormData] = useState({
     name: user?.name || '',
@@ -40,6 +42,10 @@ export default function ProfileSettings() {
     try {
       const res = await api.put('/settings/profile', formData);
       setUser({ ...user, ...res.data });
+      // Update i18n language if changed
+      if (formData.language !== i18n.language) {
+        i18n.changeLanguage(formData.language);
+      }
       setStatus({ type: 'success', message: 'Your changes have been saved.' });
     } catch (err: any) {
       setStatus({ type: 'error', message: err.response?.data?.error || 'Failed to update profile.' });
@@ -50,7 +56,7 @@ export default function ProfileSettings() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-bold text-[hsl(var(--foreground))] mb-6">Profile Information</h2>
+      <h2 className="text-xl font-bold text-[hsl(var(--foreground))] mb-6">{t('settings.profile_info.title')}</h2>
       
       {status && (
         <div className={`p-4 rounded-lg text-sm font-medium ${status.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
@@ -60,7 +66,7 @@ export default function ProfileSettings() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[hsl(var(--foreground))]">Full Name</label>
+          <label className="text-sm font-medium text-[hsl(var(--foreground))]">{t('settings.profile_info.full_name')}</label>
           <input 
             type="text" 
             name="name"
@@ -70,7 +76,7 @@ export default function ProfileSettings() {
           />
         </div>
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[hsl(var(--foreground))]">Email Address</label>
+          <label className="text-sm font-medium text-[hsl(var(--foreground))]">{t('settings.profile_info.email')}</label>
           <input 
             type="email" 
             value={user?.email || ''}
@@ -79,7 +85,7 @@ export default function ProfileSettings() {
           />
         </div>
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[hsl(var(--foreground))]">Phone Number</label>
+          <label className="text-sm font-medium text-[hsl(var(--foreground))]">{t('settings.profile_info.phone')}</label>
           <input 
             type="tel" 
             name="phone"
@@ -89,7 +95,7 @@ export default function ProfileSettings() {
           />
         </div>
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[hsl(var(--foreground))]">Language</label>
+          <label className="text-sm font-medium text-[hsl(var(--foreground))]">{t('settings.profile_info.language')}</label>
           <select
             name="language"
             value={formData.language}
@@ -109,18 +115,18 @@ export default function ProfileSettings() {
           disabled={loading}
           className="px-4 py-2 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] rounded-lg text-sm font-medium shadow-sm hover:bg-opacity-90 transition-colors disabled:opacity-50"
         >
-          {loading ? 'Saving...' : 'Save Changes'}
+          {loading ? t('settings.profile_info.saving') : t('settings.profile_info.save')}
         </button>
       </div>
       
       <div className="pt-8 border-t border-[hsl(var(--border))]">
-        <h3 className="text-red-500 font-bold mb-2">Danger Zone</h3>
-        <p className="text-sm text-[hsl(var(--muted-foreground))] mb-4">Disconnect from your session or permanently delete your account.</p>
+        <h3 className="text-red-500 font-bold mb-2">{t('settings.profile_info.danger_zone')}</h3>
+        <p className="text-sm text-[hsl(var(--muted-foreground))] mb-4">{t('settings.profile_info.danger_desc')}</p>
         <button 
           onClick={logout}
           className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg text-sm font-medium hover:bg-red-100 transition-colors shadow-sm"
         >
-          <LogOut className="w-4 h-4" /> Sign Out
+          <LogOut className="w-4 h-4" /> {t('settings.profile_info.sign_out')}
         </button>
       </div>
     </div>

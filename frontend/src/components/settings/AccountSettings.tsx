@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../utils/api';
 import { FileText, Loader2, Calendar } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function AccountSettings() {
+  const { t } = useTranslation();
   const [accounts, setAccounts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,16 +32,16 @@ export default function AccountSettings() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-bold text-[hsl(var(--foreground))] mb-6">Linked Accounts & Data Sources</h2>
+      <h2 className="text-xl font-bold text-[hsl(var(--foreground))] mb-6">{t('settings.accounts.title')}</h2>
       <div className="text-[hsl(var(--muted-foreground))] text-sm mb-6">
-        FinSaathi uses manual statement uploads to ground AI insights. Your connected data sources are listed below.
+        {t('settings.accounts.desc')}
       </div>
       
       {accounts.length === 0 ? (
         <div className="p-8 text-center border border-[hsl(var(--border))] rounded-lg bg-[hsl(var(--muted))/20]">
-          <p className="text-[hsl(var(--muted-foreground))]">No financial accounts connected yet.</p>
+          <p className="text-[hsl(var(--muted-foreground))]">{t('settings.accounts.no_accounts')}</p>
           <a href="/transactions" className="inline-block mt-4 text-[hsl(var(--primary))] font-medium hover:underline">
-            Upload Statement
+            {t('settings.accounts.upload')}
           </a>
         </div>
       ) : (
@@ -52,19 +54,19 @@ export default function AccountSettings() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-[hsl(var(--foreground))] truncate max-w-xs">{doc.file_name}</h4>
-                  <p className="text-sm text-[hsl(var(--muted-foreground))]">Statement-based account</p>
+                  <p className="text-sm text-[hsl(var(--muted-foreground))]">{t('settings.accounts.statement_based')}</p>
                   <div className="flex items-center gap-2 mt-1 text-xs text-[hsl(var(--muted-foreground))]">
                     <Calendar className="w-3 h-3" />
-                    Last updated: {new Date(doc.uploaded_at).toLocaleDateString()}
+                    {t('settings.accounts.last_updated')} {new Date(doc.uploaded_at).toLocaleDateString()}
                   </div>
                 </div>
               </div>
               <div className="mt-4 sm:mt-0 flex flex-col sm:items-end">
                 <span className={`text-xs font-medium px-2 py-1 rounded-full ${doc.processing_status === 'COMPLETED' ? 'bg-green-50 text-green-700' : 'bg-yellow-50 text-yellow-700'}`}>
-                  {doc.processing_status === 'COMPLETED' ? 'Active' : 'Processing'}
+                  {doc.processing_status === 'COMPLETED' ? t('settings.accounts.active') : t('settings.accounts.processing')}
                 </span>
                 <a href="/transactions" className="text-xs text-[hsl(var(--primary))] hover:underline mt-2">
-                  View Transactions
+                  {t('settings.accounts.view_transactions')}
                 </a>
               </div>
             </div>
